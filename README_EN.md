@@ -63,9 +63,9 @@ npm start
 
 ### 🔧 Configure MCP Clients
 
-#### Cursor Configuration
+#### It is recommended to use Cursor for quick experience (two methods)Cursor Configuration
 
-First run `npm i howtocook-mcp`, otherwise you'll encounter a `Failed to create client` error.
+1. Using npm package: Please run `npm i -g howtocook-mcp` first, otherwise `Failed to create client` will appear
 
 Then add the MCP server configuration in Cursor settings:
 
@@ -80,7 +80,7 @@ Then add the MCP server configuration in Cursor settings:
 }
 ```
 
-If running from a local cloned repository, use this configuration:
+2. If running from a local cloned repository, use this configuration:
 
 ```json
 {
@@ -151,7 +151,6 @@ Parameters:
 - This package is published on npm and can be installed globally via `npm install -g howtocook-mcp`
 - Compatible with all AI assistants and applications that support the MCP protocol
 - On first use, AI may need some time to familiarize itself with these tools (like preheating an oven)
-- Ensure the `all_recipes.json` file is properly accessible by the program
 
 ## 🤝 Contributing
 

@@ -63,9 +63,9 @@ npm start
 
 ### 🔧 配置 MCP 客户端
 
-#### Cursor 配置
+#### 推荐使用 Cursor 快速体验(两种方式)
 
-请先运行 `npm i howtocook-mcp` ,否则会出现 `Failed to create client`
+1. 使用 npm 包：请先运行 `npm i -g howtocook-mcp` ,否则会出现 `Failed to create client`
 
 然后在 Cursor 设置中添加 MCP 服务器配置：
 
@@ -80,7 +80,7 @@ npm start
 }
 ```
 
-如果是克隆仓库本地运行，请使用如下配置
+2. 如果是克隆仓库本地运行，请使用如下配置
 
 ```json
 {
@@ -151,7 +151,6 @@ npm start
 - 该包已发布至 npm，可直接通过`npm install -g howtocook-mcp`全局安装
 - 本服务兼容所有支持 MCP 协议的 AI 助手和应用
 - 首次使用时，AI 可能需要一点时间来熟悉如何使用这些工具（就像烧热锅一样）
-- 确保`all_recipes.json`文件可被程序正确访问
 
 ## 🤝 贡献
 
