@@ -1,24 +1,26 @@
-# 🍳 HowToCook MCP Server 🥘 -- 炫一周好饭，拒绝拼好饭
+# 🍳 HowToCook-MCP Server 🥘 -- 炫一周好饭，拒绝拼好饭
+
+[English](./README.en.md) | 简体中文
 
 > 让 AI 助手变身私人大厨，为你的一日三餐出谋划策！
 
-基于美味的菜谱 JSON 数据打造的 MCP(Model Context Protocol)服务器，让 AI 助手能够为你推荐菜谱、规划膳食，解决"今天吃什么"的世纪难题！
+基于[Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook)打造的 MCP(Model Context Protocol)服务器，让 AI 助手能够为你推荐菜谱、规划膳食，解决"今天吃什么"的世纪难题！
 
-数据来源：[HowToCook](https://github.com/Anduin2017/HowToCook) ⭐ 没有 star 的同学快去点个星星吧！
+数据来源：[Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook) ⭐ 没有 star 的同学快去点个星星吧！
 
 ## 🔌 支持的 MCP 客户端
 
 本服务器适用于所有支持 MCP 协议的 AI 助手和客户端，包括但不限于：
 
 - 🤖 Claude 桌面应用
-- 📝 Cursor IDE
+- 📝 Cursor
 - 💼 其他支持 MCP 的客户端
 
 ## ✨ 美味功能
 
 该 MCP 服务器提供以下美食工具:
 
-1. **📚 查询全部菜谱** - 获取所有可用菜谱数据，做菜百科全书
+1. **📚 查询全部菜谱** - 获取所有可用菜谱数据，做菜百科全书 -- 慎用这个--上下文太大
 2. **🔍 根据分类查询菜谱** - 按照分类筛选菜谱，想吃水产？早餐？荤菜？主食？一键搞定！
 3. **🧩 智能推荐膳食** - 根据你的忌口、过敏原和用餐人数，为你规划整整一周的美味佳肴
 4. **🎲 不知道吃什么** - 选择困难症福音！根据人数直接推荐今日菜单，再也不用纠结了
@@ -61,38 +63,33 @@ npm start
 
 ### 🔧 配置 MCP 客户端
 
-#### Claude 桌面应用配置
+#### Cursor 配置
 
-1. 找到 Claude 桌面应用的配置文件:
+请先运行 `npm i howtocook-mcp` ,否则会出现 `Failed to create client`
 
-   - Windows: `%AppData%\Claude\claude_desktop_config.json` 🪟
-   - MacOS: `~/Library/Application Support/Claude/claude_desktop_config.json` 🍎
-
-2. 修改配置文件，添加以下内容:
+然后在 Cursor 设置中添加 MCP 服务器配置：
 
 ```json
 {
-  "mcpServers": {
-    "howtocook": {
-      "command": "npx",
-      "args": ["-y", "howtocook-mcp-server"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "npx",
+			"args": ["-y", "howtocook-mcp"]
+		}
+	}
 }
 ```
 
-#### Cursor IDE 配置
-
-在 Cursor 设置中添加 MCP 服务器配置：
+如果是克隆仓库本地运行，请使用如下配置
 
 ```json
 {
-  "mcpServers": {
-    "howtocook": {
-      "command": "npx",
-      "args": ["-y", "howtocook-mcp-server"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "node",
+			"args": ["youpath\\howtocook-mcp\\build\\index.js"]
+		}
+	}
 }
 ```
 
@@ -100,8 +97,8 @@ npm start
 
 对于其他支持 MCP 协议的客户端，请参考各自的文档进行配置，通常需要指定：
 
-- 服务器名称: `howtocook`
-- 命令: `npx -y howtocook-mcp-server`
+- 服务器名称: `howtocook-mcp`
+- 命令: `npx -y howtocook-mcp`
 
 3. 重启客户端，让美食魔法生效 ✨
 
@@ -151,7 +148,7 @@ npm start
 
 ## 📝 小贴士
 
-- 该包已发布至 npm，可直接通过`npm install -g howtocook-mcp-server`全局安装
+- 该包已发布至 npm，可直接通过`npm install -g howtocook-mcp`全局安装
 - 本服务兼容所有支持 MCP 协议的 AI 助手和应用
 - 首次使用时，AI 可能需要一点时间来熟悉如何使用这些工具（就像烧热锅一样）
 - 确保`all_recipes.json`文件可被程序正确访问
