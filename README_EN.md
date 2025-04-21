@@ -8,6 +8,11 @@ An MCP (Model Context Protocol) server based on [Anduin2017/HowToCook](https://g
 
 Data Source: [Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook) ⭐ Don't forget to star the repo if you haven't already!
 
+## 📸 Preview
+
+![Feature Preview 1](https://mp-bc8d1f0a-3356-4a4e-8592-f73a3371baa2.cdn.bspapp.com/npm/1.png)
+![Feature Preview 2](https://mp-bc8d1f0a-3356-4a4e-8592-f73a3371baa2.cdn.bspapp.com/npm/2.png)
+
 ## 🔌 Supported MCP Clients
 
 This server works with all AI assistants and clients that support the MCP protocol, including but not limited to:
