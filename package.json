@@ -1,0 +1,40 @@
+{
+  "name": "howtocook-mcp",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "howtocook-mcp": "./build/index.js"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "tsc && node build/index.js"
+  },
+  "keywords": [
+    "howtocook",
+    "mcp",
+    "server",
+    "recipe",
+    "food",
+    "cook"
+  ],
+  "author": "worry",
+  "license": "ISC",
+  "description": "MCP Server for howtocook recipe database - 炫一周好饭，拒绝拼好饭",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.9.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  }
+}
