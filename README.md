@@ -1,6 +1,6 @@
 # 🍳 HowToCook-MCP Server 🥘 -- 炫一周好饭，拒绝拼好饭
 
-[English](./README.en.md) | 简体中文
+[English](./README_EN.md) | 简体中文
 
 > 让 AI 助手变身私人大厨，为你的一日三餐出谋划策！
 
