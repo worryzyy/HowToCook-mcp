@@ -43,7 +43,7 @@ This MCP server provides the following culinary tools:
 
 ```bash
 git clone https://github.com/worryzyy/howtocook-mcp.git
-cd howtocook-mcp-server
+cd howtocook-mcp
 ```
 
 2. Install dependencies (as simple as preparing ingredients!)
