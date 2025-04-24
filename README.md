@@ -43,7 +43,7 @@
 
 ```bash
 git clone https://github.com/worryzyy/howtocook-mcp.git
-cd howtocook-mcp-server
+cd howtocook-mcp
 ```
 
 2. 安装依赖（就像准备食材一样简单！）
