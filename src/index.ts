@@ -37,8 +37,45 @@ interface Recipe {
   additional_notes: string[];
 }
 
+// 添加简化版的Recipe接口，只包含id、name和description
+interface SimpleRecipe {
+  id: string;
+  name: string;
+  description: string;
+  ingredients: {
+    name: string;
+    text_quantity: string;
+  }[];
+}
+
+// 更简化的Recipe接口，只包含name和description，用于getAllRecipes
+interface NameOnlyRecipe {
+  name: string;
+  description: string;
+}
+
+// 创建简化版的Recipe数据
+function simplifyRecipe(recipe: Recipe): SimpleRecipe {
+  return {
+    id: recipe.id,
+    name: recipe.name,
+    description: recipe.description,
+    ingredients: recipe.ingredients.map(ingredient => ({
+      name: ingredient.name,
+      text_quantity: ingredient.text_quantity
+    }))
+  };
+}
+
+// 创建只包含name和description的Recipe数据
+function simplifyRecipeNameOnly(recipe: Recipe): NameOnlyRecipe {
+  return {
+    name: recipe.name,
+    description: recipe.description
+  };
+}
+
 // 远程菜谱JSON文件URL
-// const RECIPES_URL = 'https://raw.githubusercontent.com/worryzyy/HowToCook-mcp/main/all_recipes.json';
 const RECIPES_URL = 'https://mp-bc8d1f0a-3356-4a4e-8592-f73a3371baa2.cdn.bspapp.com/all_recipes.json';
 
 // 读取菜谱数据
@@ -66,8 +103,8 @@ async function fetchRecipes(): Promise<Recipe[]> {
 
 // 创建MCP服务器
 const server = new McpServer({
-  name: "howtocook-mcp-server",
-  version: "1.0.2",
+  name: "howtocook-mcp",
+  version: "0.0.5",
   capabilities: {
     resources: {},
     tools: {},
@@ -75,18 +112,15 @@ const server = new McpServer({
 });
 
 // 启动服务的主函数
-async function startServer() {
+export async function startServer() {
   // 获取菜谱数据
-  console.log(`正在从远程URL获取菜谱数据: ${RECIPES_URL}`);
   recipes = await fetchRecipes();
   
   // 确保我们读取到了菜谱数据
   if (recipes.length === 0) {
-    console.error('无法从远程服务器获取菜谱数据，退出程序');
     process.exit(1);
   }
   
-  console.log(`成功从远程服务器获取${recipes.length}个菜谱数据`);
 
   // 获取所有分类
   const getAllCategories = () => {
@@ -106,15 +140,17 @@ async function startServer() {
     "mcp_howtocook_getAllRecipes",
     "获取所有菜谱",
     {
-      random_string: z.string().optional()
-                    .describe('可选的随机字符串参数，无实际作用')
+      'no_params': z.string().optional()
+                   .describe('无参数')
     }, // 使用可选参数提供描述
     async () => {
+      // 返回更简化版的菜谱数据，只包含name和description
+      const simplifiedRecipes = recipes.map(simplifyRecipeNameOnly);
       return {
         content: [
           {
             type: "text",
-            text: JSON.stringify(recipes, null, 2),
+            text: JSON.stringify(simplifiedRecipes, null, 2),
           },
         ],
       };
@@ -131,11 +167,13 @@ async function startServer() {
     },
     async ({ category }: { category: string }) => {
       const filteredRecipes = recipes.filter((recipe) => recipe.category === category);
+      // 返回简化版的菜谱数据
+      const simplifiedRecipes = filteredRecipes.map(simplifyRecipe);
       return {
         content: [
           {
             type: "text",
-            text: JSON.stringify(filteredRecipes, null, 2),
+            text: JSON.stringify(simplifiedRecipes, null, 2),
           },
         ],
       };
@@ -188,15 +226,15 @@ async function startServer() {
       const mealPlan: {
         weekdays: Array<{
           day: string;
-          breakfast: Recipe[];
-          lunch: Recipe[];
-          dinner: Recipe[];
+          breakfast: SimpleRecipe[];
+          lunch: SimpleRecipe[];
+          dinner: SimpleRecipe[];
         }>;
         weekend: Array<{
           day: string;
-          breakfast: Recipe[];
-          lunch: Recipe[];
-          dinner: Recipe[];
+          breakfast: SimpleRecipe[];
+          lunch: SimpleRecipe[];
+          dinner: SimpleRecipe[];
         }>;
         groceryList: {
           ingredients: Array<{
@@ -227,20 +265,25 @@ async function startServer() {
         }
       };
 
+      // 用于跟踪已经选择的菜谱，以便后续处理食材信息
+      const selectedRecipes: Recipe[] = [];
+
       // 周一至周五
       for (let i = 0; i < 5; i++) {
         const dayPlan = {
           day: ['周一', '周二', '周三', '周四', '周五'][i],
-          breakfast: [] as Recipe[],
-          lunch: [] as Recipe[],
-          dinner: [] as Recipe[]
+          breakfast: [] as SimpleRecipe[],
+          lunch: [] as SimpleRecipe[],
+          dinner: [] as SimpleRecipe[]
         };
 
         // 早餐 - 根据人数推荐1-2个早餐菜单
         const breakfastCount = Math.max(1, Math.ceil(peopleCount / 5));
         for (let j = 0; j < breakfastCount && recipesByCategory['早餐'] && recipesByCategory['早餐'].length > 0; j++) {
           const breakfastIndex = Math.floor(Math.random() * recipesByCategory['早餐'].length);
-          dayPlan.breakfast.push(recipesByCategory['早餐'][breakfastIndex]);
+          const selectedRecipe = recipesByCategory['早餐'][breakfastIndex];
+          selectedRecipes.push(selectedRecipe);
+          dayPlan.breakfast.push(simplifyRecipe(selectedRecipe));
           // 避免重复，从候选列表中移除
           recipesByCategory['早餐'] = recipesByCategory['早餐'].filter((_, idx) => idx !== breakfastIndex);
         }
@@ -264,7 +307,9 @@ async function startServer() {
           
           if (recipesByCategory[selectedCategory] && recipesByCategory[selectedCategory].length > 0) {
             const index = Math.floor(Math.random() * recipesByCategory[selectedCategory].length);
-            dayPlan.lunch.push(recipesByCategory[selectedCategory][index]);
+            const selectedRecipe = recipesByCategory[selectedCategory][index];
+            selectedRecipes.push(selectedRecipe);
+            dayPlan.lunch.push(simplifyRecipe(selectedRecipe));
             // 避免重复，从候选列表中移除
             recipesByCategory[selectedCategory] = recipesByCategory[selectedCategory].filter((_, idx) => idx !== index);
           }
@@ -286,7 +331,9 @@ async function startServer() {
           
           if (recipesByCategory[selectedCategory] && recipesByCategory[selectedCategory].length > 0) {
             const index = Math.floor(Math.random() * recipesByCategory[selectedCategory].length);
-            dayPlan.dinner.push(recipesByCategory[selectedCategory][index]);
+            const selectedRecipe = recipesByCategory[selectedCategory][index];
+            selectedRecipes.push(selectedRecipe);
+            dayPlan.dinner.push(simplifyRecipe(selectedRecipe));
             // 避免重复，从候选列表中移除
             recipesByCategory[selectedCategory] = recipesByCategory[selectedCategory].filter((_, idx) => idx !== index);
           }
@@ -299,16 +346,18 @@ async function startServer() {
       for (let i = 0; i < 2; i++) {
         const dayPlan = {
           day: ['周六', '周日'][i],
-          breakfast: [] as Recipe[],
-          lunch: [] as Recipe[],
-          dinner: [] as Recipe[]
+          breakfast: [] as SimpleRecipe[],
+          lunch: [] as SimpleRecipe[],
+          dinner: [] as SimpleRecipe[]
         };
 
         // 早餐 - 根据人数推荐菜品，至少2个菜品，随人数增加
         const breakfastCount = Math.max(2, Math.ceil(peopleCount / 3));
         for (let j = 0; j < breakfastCount && recipesByCategory['早餐'] && recipesByCategory['早餐'].length > 0; j++) {
           const breakfastIndex = Math.floor(Math.random() * recipesByCategory['早餐'].length);
-          dayPlan.breakfast.push(recipesByCategory['早餐'][breakfastIndex]);
+          const selectedRecipe = recipesByCategory['早餐'][breakfastIndex];
+          selectedRecipes.push(selectedRecipe);
+          dayPlan.breakfast.push(simplifyRecipe(selectedRecipe));
           recipesByCategory['早餐'] = recipesByCategory['早餐'].filter((_, idx) => idx !== breakfastIndex);
         }
 
@@ -318,8 +367,8 @@ async function startServer() {
         const weekendAddition = peopleCount <= 4 ? 1 : 2; // 4人以下多1个菜，4人以上多2个菜
         const mealCount = weekdayMealCount + weekendAddition;
 
-        const getMeals = (count: number): Recipe[] => {
-          const result: Recipe[] = [];
+        const getMeals = (count: number): SimpleRecipe[] => {
+          const result: SimpleRecipe[] = [];
           const categories = ['荤菜', '水产'];
           
           // 尽量平均分配不同分类的菜品
@@ -327,12 +376,16 @@ async function startServer() {
             const category = categories[j % categories.length];
             if (recipesByCategory[category] && recipesByCategory[category].length > 0) {
               const index = Math.floor(Math.random() * recipesByCategory[category].length);
-              result.push(recipesByCategory[category][index]);
+              const selectedRecipe = recipesByCategory[category][index];
+              selectedRecipes.push(selectedRecipe);
+              result.push(simplifyRecipe(selectedRecipe));
               recipesByCategory[category] = recipesByCategory[category].filter((_, idx) => idx !== index);
             } else if (recipesByCategory['主食'] && recipesByCategory['主食'].length > 0) {
               // 如果没有足够的荤菜或水产，使用主食
               const index = Math.floor(Math.random() * recipesByCategory['主食'].length);
-              result.push(recipesByCategory['主食'][index]);
+              const selectedRecipe = recipesByCategory['主食'][index];
+              selectedRecipes.push(selectedRecipe);
+              result.push(simplifyRecipe(selectedRecipe));
               recipesByCategory['主食'] = recipesByCategory['主食'].filter((_, idx) => idx !== index);
             }
           }
@@ -387,18 +440,9 @@ async function startServer() {
       };
 
       // 处理所有菜谱
-      mealPlan.weekdays.forEach(day => {
-        day.breakfast.forEach(processRecipeIngredients);
-        day.lunch.forEach(processRecipeIngredients);
-        day.dinner.forEach(processRecipeIngredients);
-      });
+      // 使用完整的Recipe对象处理食材信息
+      selectedRecipes.forEach(processRecipeIngredients);
       
-      mealPlan.weekend.forEach(day => {
-        day.breakfast.forEach(processRecipeIngredients);
-        day.lunch.forEach(processRecipeIngredients);
-        day.dinner.forEach(processRecipeIngredients);
-      });
-
       // 整理食材清单
       for (const [name, info] of ingredientMap.entries()) {
         mealPlan.groceryList.ingredients.push({
@@ -530,7 +574,7 @@ async function startServer() {
         peopleCount,
         meatDishCount: meatCount,
         vegetableDishCount: vegetableCount,
-        dishes: recommendedDishes,
+        dishes: recommendedDishes.map(simplifyRecipe),
         message: `为${peopleCount}人推荐的菜品，包含${selectedMeatDishes.length}个荤菜和${selectedVegetableDishes.length}个素菜。`
       };
       
@@ -557,5 +601,5 @@ async function startServer() {
   }
 }
 
-// 启动服务器
-startServer(); 
+startServer();
+
