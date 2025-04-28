@@ -1,7 +1,7 @@
 import { Recipe } from '../types/index.js';
 
 // 远程菜谱JSON文件URL
-const RECIPES_URL = 'https://mp-bc8d1f0a-3356-4a4e-8592-f73a3371baa2.cdn.bspapp.com/all_recipes.json';
+const RECIPES_URL = 'https://weilei.site/all_recipes.json';
 
 // 从远程URL获取数据的异步函数
 export async function fetchRecipes(): Promise<Recipe[]> {
