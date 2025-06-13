@@ -39,14 +39,20 @@ export function registerWhatToEatTool(server: McpServer, recipes: Recipe[]) {
         }
       }
       
-      // 按照不同肉类的优先级选择荤菜
+      // 打乱肉类优先级顺序，增加随机性
       const meatTypes = ['猪肉', '鸡肉', '牛肉', '羊肉', '鸭肉', '鱼肉'];
+      // 使用 Fisher-Yates 洗牌算法打乱数组
+      for (let i = meatTypes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [meatTypes[i], meatTypes[j]] = [meatTypes[j], meatTypes[i]];
+      }
+      
       const selectedMeatDishes: Recipe[] = [];
       
       // 需要选择的荤菜数量
       const remainingMeatCount = fishDish ? meatCount - 1 : meatCount;
       
-      // 尝试按照肉类优先级选择荤菜
+      // 尝试按照随机化的肉类优先级选择荤菜
       for (const meatType of meatTypes) {
         if (selectedMeatDishes.length >= remainingMeatCount) break;
         
@@ -104,4 +110,4 @@ export function registerWhatToEatTool(server: McpServer, recipes: Recipe[]) {
       };
     }
   );
-} 
+}
