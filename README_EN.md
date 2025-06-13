@@ -29,6 +29,7 @@ This MCP server provides the following culinary tools:
 2. **🔍 Query Recipes by Category** - Filter recipes by category: seafood, breakfast, meat dishes, staple foods, and more!
 3. **🧩 Smart Meal Planning** - Get a full week's meal plan based on dietary restrictions, allergies, and number of diners
 4. **🎲 Don't Know What to Eat?** - Perfect for the indecisive! Get instant menu recommendations based on party size
+5. **🔎 Query Specific Recipe** - Search for specific recipes by name or ID, supports both exact and fuzzy matching to save tokens
 
 ## 🚀 Quick Start
 
@@ -76,12 +77,12 @@ Then add the MCP server configuration in Cursor settings:
 
 ```json
 {
-	"mcpServers": {
-		"howtocook-mcp": {
-			"command": "npx",
-			"args": ["-y", "howtocook-mcp"]
-		}
-	}
+  "mcpServers": {
+    "howtocook-mcp": {
+      "command": "npx",
+      "args": ["-y", "howtocook-mcp"]
+    }
+  }
 }
 ```
 
@@ -89,12 +90,12 @@ Then add the MCP server configuration in Cursor settings:
 
 ```json
 {
-	"mcpServers": {
-		"howtocook-mcp": {
-			"command": "node",
-			"args": ["yourpath\\howtocook-mcp\\build\\index.js"]
-		}
-	}
+  "mcpServers": {
+    "howtocook-mcp": {
+      "command": "node",
+      "args": ["yourpath\\howtocook-mcp\\build\\index.js"]
+    }
+  }
 }
 ```
 
@@ -150,6 +151,16 @@ Please use the howtocook MCP service to recommend a dinner menu for 4 people
 Parameters:
 
 - `peopleCount`: Number of diners (1-10)
+
+### 5. 🔎 Query Specific Recipe
+
+```
+Please use the howtocook MCP service to query the recipe for "Kung Pao Chicken"
+```
+
+Parameters:
+
+- `recipeId`: Recipe name or ID to search for
 
 ## 📝 Tips
 

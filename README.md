@@ -27,8 +27,9 @@
 
 1. **📚 查询全部菜谱** - 获取所有可用菜谱数据，做菜百科全书 -- 慎用这个--上下文太大
 2. **🔍 根据分类查询菜谱** - 按照分类筛选菜谱，想吃水产？早餐？荤菜？主食？一键搞定！
-3. **🧩 智能推荐膳食** - 根据你的忌口、过敏原和用餐人数，为你规划整整一周的美味佳肴
-4. **🎲 不知道吃什么** - 选择困难症福音！根据人数直接推荐今日菜单，再也不用纠结了
+3. **📖 查询指定菜谱** - 根据菜谱名称查询特定菜谱的完整详情，包括食材、步骤等
+4. **🧩 智能推荐膳食** - 根据你的忌口、过敏原和用餐人数，为你规划整整一周的美味佳肴
+5. **🎲 不知道吃什么** - 选择困难症福音！根据人数直接推荐今日菜单，再也不用纠结了
 
 ## 🚀 快速上手
 
@@ -76,12 +77,12 @@ npm start
 
 ```json
 {
-	"mcpServers": {
-		"howtocook-mcp": {
-			"command": "npx",
-			"args": ["-y", "howtocook-mcp"]
-		}
-	}
+  "mcpServers": {
+    "howtocook-mcp": {
+      "command": "npx",
+      "args": ["-y", "howtocook-mcp"]
+    }
+  }
 }
 ```
 
@@ -89,12 +90,12 @@ npm start
 
 ```json
 {
-	"mcpServers": {
-		"howtocook-mcp": {
-			"command": "node",
-			"args": ["youpath\\howtocook-mcp\\build\\index.js"]
-		}
-	}
+  "mcpServers": {
+    "howtocook-mcp": {
+      "command": "node",
+      "args": ["youpath\\howtocook-mcp\\build\\index.js"]
+    }
+  }
 }
 ```
 
