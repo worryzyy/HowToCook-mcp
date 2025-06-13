@@ -8,6 +8,8 @@
 
 数据来源：[Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook) ⭐ 没有 star 的同学快去点个星星吧！
 
+🎉 **想直接使用当前 MCP？立即体验** [https://howtocookmcp.weilei.site/](https://howtocookmcp.weilei.site/)
+
 ## 📸 效果预览
 
 ![功能预览1](https://mp-bc8d1f0a-3356-4a4e-8592-f73a3371baa2.cdn.bspapp.com/npm/1.png)

@@ -8,6 +8,8 @@ An MCP (Model Context Protocol) server based on [Anduin2017/HowToCook](https://g
 
 Data Source: [Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook) ⭐ Don't forget to star the repo if you haven't already!
 
+🎉 **Want to use MCP right away? Try it now** [https://howtocookmcp.weilei.site/](https://howtocookmcp.weilei.site/)
+
 ## 📸 Preview
 
 ![Feature Preview 1](https://mp-bc8d1f0a-3356-4a4e-8592-f73a3371baa2.cdn.bspapp.com/npm/1.png)
