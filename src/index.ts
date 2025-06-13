@@ -12,7 +12,7 @@ import { registerGetRecipeByIdTool } from "./tools/getRecipeById.js";
 // 创建MCP服务器
 const server = new McpServer({
   name: "howtocook-mcp",
-  version: "0.0.8",
+  version: "0.0.9",
   capabilities: {
     resources: {},
     tools: {},
