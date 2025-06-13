@@ -7,11 +7,12 @@ import { registerGetAllRecipesTool } from "./tools/getAllRecipes.js";
 import { registerGetRecipesByCategoryTool } from "./tools/getRecipesByCategory.js";
 import { registerRecommendMealsTool } from "./tools/recommendMeals.js";
 import { registerWhatToEatTool } from "./tools/whatToEat.js";
+import { registerGetRecipeByIdTool } from "./tools/getRecipeById.js";
 
 // 创建MCP服务器
 const server = new McpServer({
   name: "howtocook-mcp",
-  version: "0.0.6",
+  version: "0.0.8",
   capabilities: {
     resources: {},
     tools: {},
@@ -37,6 +38,7 @@ export async function startServer() {
   registerGetRecipesByCategoryTool(server, recipes, categories);
   registerRecommendMealsTool(server, recipes);
   registerWhatToEatTool(server, recipes);
+  registerGetRecipeByIdTool(server, recipes);
 
   // 启动MCP服务器
   const transport = new StdioServerTransport();
