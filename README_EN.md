@@ -10,6 +10,28 @@ Data Source: [Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook) ⭐
 
 🎉 **Want to use MCP right away? Try it now** [https://howtocookmcp.weilei.site/](https://howtocookmcp.weilei.site/)
 
+🎉 **At the same time, we also provide DXT (Desktop Extensions) for everyone to experience, one-click installation to Claude Desktop**
+
+As follows: Please make sure you have installed the latest version of Claude Desktop. The current MCP DXT file has been uploaded to the code library. You can download it yourself or fork this repository to build it yourself
+
+![DXT](./public/dxt.png)
+
+![DXT](./public/dxt2.png)
+
+![DXT](./public/dxt3.png)
+
+How to package local development into DXT?
+
+1. Run `npm install -g @anthropic-ai/dxt`
+
+2. In the folder containing the local MCP server, run `dxt init`. That is, the root directory of your MCP. This command will guide you to create `manifest.json`
+
+3. Run `dxt pack` to create a dxt file
+
+Now, any application that supports DXT can run your local MCP server. For example, opening the file with Claude for macOS and Windows will display the installation dialog
+
+For more information, see: [anthropics/dxt](https://github.com/anthropics/dxt)
+
 ## 📸 Preview
 
 ![Feature Preview 1](https://mp-bc8d1f0a-3356-4a4e-8592-f73a3371baa2.cdn.bspapp.com/npm/1.png)
@@ -79,12 +101,12 @@ Then add the MCP server configuration in Cursor settings:
 
 ```json
 {
-  "mcpServers": {
-    "howtocook-mcp": {
-      "command": "npx",
-      "args": ["-y", "howtocook-mcp"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "npx",
+			"args": ["-y", "howtocook-mcp"]
+		}
+	}
 }
 ```
 
@@ -92,12 +114,12 @@ Then add the MCP server configuration in Cursor settings:
 
 ```json
 {
-  "mcpServers": {
-    "howtocook-mcp": {
-      "command": "node",
-      "args": ["yourpath\\howtocook-mcp\\build\\index.js"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "node",
+			"args": ["yourpath\\howtocook-mcp\\build\\index.js"]
+		}
+	}
 }
 ```
 

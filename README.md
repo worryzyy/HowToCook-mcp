@@ -10,6 +10,26 @@
 
 🎉 **想直接使用当前 MCP？立即体验** [https://howtocookmcp.weilei.site/](https://howtocookmcp.weilei.site/)
 
+🎉 **同时，我们也提供了 DXT（Desktop Extensions）供大家体验，一键安装到 Claude Desktop**
+
+如下：请确保你已经安装了最新版的 Claude Desktop, 当前 MCP 的 DXT 文件已上传代码库，可以自行下载或者 Fork 本仓库自行构建
+
+![DXT](./public/dxt.png)
+![DXT](./public/dxt2.png)
+![DXT](./public/dxt3.png)
+
+本地开发如何打包成 DXT？
+
+1.运行 `npm install -g @anthropic-ai/dxt`
+
+2.在包含本地 MCP 服务器的文件夹中，运行 `dxt init`。也就是您 MCP 的根目录，此命令将引导您创建`manifest.json`
+
+3.运行`dxt pack`创建 dxt 文件
+
+现在，任何支持 DXT 的应用都可以运行您的本地 MCP 服务器。例如，使用适用于 macOS 和 Windows 的 Claude 打开该文件即可显示安装对话框
+
+具体参阅:[anthropics/dxt](https://github.com/anthropics/dxt)
+
 ## 📸 效果预览
 
 ![功能预览1](https://mp-bc8d1f0a-3356-4a4e-8592-f73a3371baa2.cdn.bspapp.com/npm/1.png)
@@ -79,12 +99,12 @@ npm start
 
 ```json
 {
-  "mcpServers": {
-    "howtocook-mcp": {
-      "command": "npx",
-      "args": ["-y", "howtocook-mcp"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "npx",
+			"args": ["-y", "howtocook-mcp"]
+		}
+	}
 }
 ```
 
@@ -92,12 +112,12 @@ npm start
 
 ```json
 {
-  "mcpServers": {
-    "howtocook-mcp": {
-      "command": "node",
-      "args": ["youpath\\howtocook-mcp\\build\\index.js"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "node",
+			"args": ["youpath\\howtocook-mcp\\build\\index.js"]
+		}
+	}
 }
 ```
 
@@ -171,3 +191,11 @@ MIT License - 随意使用，就像分享美食配方一样慷慨！
 ---
 
 > 🍴 美食即将开始，胃口准备好了吗？
+
+## 写在最后
+
+平时关注 MCP 比较多，特意新建了一个 MCP 的群聊，欢迎各位大佬加群讨论更多 MCP 的话题
+
+![MCP群聊](./public/wechat.jpg)
+
+或者直接加作者 VX 进群：`worry3stone`, 请注明`MCP Exchange`，否则会被忽略哦
