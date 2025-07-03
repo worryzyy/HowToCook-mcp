@@ -83,7 +83,20 @@ npm install
 npm run build
 ```
 
-## 🍽️ Getting Started
+### 🎯 CLI Arguments
+
+The server accepts the following command-line arguments:
+
+- `--transport <stdio|http|sse>` - Transport to use (stdio by default)
+- `--port <number>` - Port to listen on when using http or sse transport (default 3000)
+
+Example with http transport and port 8080:
+
+```bash
+node build/index.js --transport http --port 8080
+```
+
+## ��️ Getting Started
 
 ### 🔥 Start the Server
 
@@ -101,12 +114,12 @@ Then add the MCP server configuration in Cursor settings:
 
 ```json
 {
-	"mcpServers": {
-		"howtocook-mcp": {
-			"command": "npx",
-			"args": ["-y", "howtocook-mcp"]
-		}
-	}
+  "mcpServers": {
+    "howtocook-mcp": {
+      "command": "npx",
+      "args": ["-y", "howtocook-mcp"]
+    }
+  }
 }
 ```
 
@@ -114,12 +127,12 @@ Then add the MCP server configuration in Cursor settings:
 
 ```json
 {
-	"mcpServers": {
-		"howtocook-mcp": {
-			"command": "node",
-			"args": ["yourpath\\howtocook-mcp\\build\\index.js"]
-		}
-	}
+  "mcpServers": {
+    "howtocook-mcp": {
+      "command": "node",
+      "args": ["yourpath\\howtocook-mcp\\build\\index.js"]
+    }
+  }
 }
 ```
 

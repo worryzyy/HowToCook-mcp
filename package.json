@@ -13,7 +13,13 @@
   "scripts": {
     "build": "tsc",
     "start": "node build/index.js",
+    "start:stdio": "node build/index.js --transport stdio",
+    "start:http": "node build/index.js --transport http",
+    "start:sse": "node build/index.js --transport sse",
     "dev": "tsc && node build/index.js",
+    "dev:stdio": "tsc && node build/index.js --transport stdio",
+    "dev:http": "tsc && node build/index.js --transport http",
+    "dev:sse": "tsc && node build/index.js --transport sse",
     "prepublishOnly": "npm run build",
     "publish:npm": "npm publish",
     "publish:patch": "npm version patch && npm publish",
@@ -33,6 +39,9 @@
   "description": "MCP Server for howtocook recipe database - 炫一周好饭，拒绝拼好饭",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.9.0",
+    "@types/express": "^5.0.3",
+    "commander": "^14.0.0",
+    "express": "^5.1.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

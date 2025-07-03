@@ -81,6 +81,19 @@ npm install
 npm run build
 ```
 
+### 🎯 命令行参数
+
+服务器支持以下命令行参数：
+
+- `--transport <stdio|http|sse>` - 选择传输方式（默认为 stdio）
+- `--port <number>` - 使用 http 或 sse 传输时的监听端口（默认为 3000）
+
+示例：使用 http 传输并监听 8080 端口
+
+```bash
+node build/index.js --transport http --port 8080
+```
+
 ## 🍽️ 开始使用
 
 ### 🔥 启动服务器
@@ -99,12 +112,12 @@ npm start
 
 ```json
 {
-	"mcpServers": {
-		"howtocook-mcp": {
-			"command": "npx",
-			"args": ["-y", "howtocook-mcp"]
-		}
-	}
+  "mcpServers": {
+    "howtocook-mcp": {
+      "command": "npx",
+      "args": ["-y", "howtocook-mcp"]
+    }
+  }
 }
 ```
 
@@ -112,12 +125,12 @@ npm start
 
 ```json
 {
-	"mcpServers": {
-		"howtocook-mcp": {
-			"command": "node",
-			"args": ["youpath\\howtocook-mcp\\build\\index.js"]
-		}
-	}
+  "mcpServers": {
+    "howtocook-mcp": {
+      "command": "node",
+      "args": ["youpath\\howtocook-mcp\\build\\index.js"]
+    }
+  }
 }
 ```
 
