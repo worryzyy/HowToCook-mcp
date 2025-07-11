@@ -2,6 +2,16 @@
 
 English | [简体中文](./README.md)
 
+<div align="center">
+
+CDN acceleration and security protection for this project are sponsored by Tencent EdgeOne.
+
+[Best Asian CDN, Edge, and Secure Solutions - Tencent EdgeOne](https://edgeone.ai/zh?from=github)
+
+<img src="./public/edgeone.png"/>
+
+</div>
+
 > Turn your AI assistant into a personal chef that helps plan your daily meals!
 
 An MCP (Model Context Protocol) server based on [Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook), allowing AI assistants to recommend recipes, plan meals, and solve the age-old question of "what should I eat today?"
@@ -114,12 +124,12 @@ Then add the MCP server configuration in Cursor settings:
 
 ```json
 {
-  "mcpServers": {
-    "howtocook-mcp": {
-      "command": "npx",
-      "args": ["-y", "howtocook-mcp"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "npx",
+			"args": ["-y", "howtocook-mcp"]
+		}
+	}
 }
 ```
 
@@ -127,12 +137,12 @@ Then add the MCP server configuration in Cursor settings:
 
 ```json
 {
-  "mcpServers": {
-    "howtocook-mcp": {
-      "command": "node",
-      "args": ["yourpath\\howtocook-mcp\\build\\index.js"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "node",
+			"args": ["yourpath\\howtocook-mcp\\build\\index.js"]
+		}
+	}
 }
 ```
 

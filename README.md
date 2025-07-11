@@ -2,6 +2,16 @@
 
 [English](./README_EN.md) | 简体中文
 
+<div align="center">
+
+本项目 CDN 加速及安全防护由 Tencent EdgeOne 赞助
+
+[亚洲最佳 CDN、边缘和安全解决方案 - Tencent EdgeOne](https://edgeone.ai/zh?from=github)
+
+<img src="./public/edgeone.png"/>
+
+</div>
+
 > 让 AI 助手变身私人大厨，为你的一日三餐出谋划策！
 
 基于[Anduin2017/HowToCook](https://github.com/Anduin2017/HowToCook)打造的 MCP(Model Context Protocol)服务器，让 AI 助手能够为你推荐菜谱、规划膳食，解决"今天吃什么"的世纪难题！
@@ -112,12 +122,12 @@ npm start
 
 ```json
 {
-  "mcpServers": {
-    "howtocook-mcp": {
-      "command": "npx",
-      "args": ["-y", "howtocook-mcp"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "npx",
+			"args": ["-y", "howtocook-mcp"]
+		}
+	}
 }
 ```
 
@@ -125,12 +135,12 @@ npm start
 
 ```json
 {
-  "mcpServers": {
-    "howtocook-mcp": {
-      "command": "node",
-      "args": ["youpath\\howtocook-mcp\\build\\index.js"]
-    }
-  }
+	"mcpServers": {
+		"howtocook-mcp": {
+			"command": "node",
+			"args": ["youpath\\howtocook-mcp\\build\\index.js"]
+		}
+	}
 }
 ```
 
