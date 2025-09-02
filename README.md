@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/worryzyy-howtocook-mcp-badge.png)](https://mseep.ai/app/worryzyy-howtocook-mcp)
+
 # 🍳 HowToCook-MCP Server 🥘 -- 炫一周好饭，拒绝拼好饭
 
 [English](./README_EN.md) | 简体中文
