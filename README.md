@@ -215,13 +215,3 @@ MIT License - 随意使用，就像分享美食配方一样慷慨！
 
 > 🍴 美食即将开始，胃口准备好了吗？
 
-## 写在最后
-
-平时关注 MCP 比较多，特意新建了一个 MCP 的群聊，欢迎各位大佬加群讨论更多 MCP 的话题
-
-<div style="text-align: center;">
-<img src="./public/wechat.jpg" alt="MCP群聊" width="300" />
-</div>
-
-
-或者直接加作者 VX 进群：`worry3stone`, 请注明`MCP Exchange`，否则会被忽略哦
