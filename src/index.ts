@@ -63,9 +63,9 @@ function createServerInstance(): McpServer {
 }
 
 // 加载菜谱数据
-async function loadRecipeData() {
+function loadRecipeData() {
   try {
-    recipes = await fetchRecipes();
+    recipes = fetchRecipes();
     categories = getAllCategories(recipes);
     console.log(`📚 已加载 ${recipes.length} 个菜谱`);
   } catch (error) {

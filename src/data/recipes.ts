@@ -1,24 +1,20 @@
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
 import { Recipe } from '../types/index.js'
 
-// 远程菜谱JSON文件URL
-const RECIPES_URL = 'https://weilei.site/all_recipes.json'
+// 获取本地JSON文件路径
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+const LOCAL_RECIPES_PATH = join(__dirname, '../../all_recipes.json')
 
-// 从远程URL获取数据的异步函数
-export async function fetchRecipes(): Promise<Recipe[]> {
+// 从本地文件加载菜谱数据
+export function fetchRecipes(): Recipe[] {
 	try {
-		// 使用fetch API获取远程数据
-		const response = await fetch(RECIPES_URL)
-
-		if (!response.ok) {
-			throw new Error(`HTTP error! Status: ${response.status}`)
-		}
-
-		// 解析JSON数据
-		const data = await response.json()
-		return data as Recipe[]
+		const data = readFileSync(LOCAL_RECIPES_PATH, 'utf-8')
+		return JSON.parse(data) as Recipe[]
 	} catch (error) {
-		console.error('获取远程菜谱数据失败:', error)
-		// 直接返回空数组，不尝试使用本地备份
+		console.error('加载菜谱数据失败:', error)
 		return []
 	}
 }
