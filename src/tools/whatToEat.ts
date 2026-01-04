@@ -11,6 +11,10 @@ export function registerWhatToEatTool(server: McpServer, recipes: Recipe[]) {
       peopleCount: z.number().int().min(1).max(10)
                    .describe('用餐人数，1-10之间的整数，会根据人数推荐合适数量的菜品')
     },
+    {
+      title: "What to Eat",
+      readOnlyHint: true,
+    },
     async ({ peopleCount }: { peopleCount: number }) => {
       // 根据人数计算荤素菜数量
       const vegetableCount = Math.floor((peopleCount + 1) / 2);

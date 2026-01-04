@@ -11,6 +11,10 @@ export function registerGetAllRecipesTool(server: McpServer, recipes: Recipe[]) 
       'no_param': z.string().optional()
                        .describe('无参数')
     },
+    {
+      title: "Get All Recipes",
+      readOnlyHint: true,
+    },
     async () => {
       // 返回更简化版的菜谱数据，只包含name和description
       const simplifiedRecipes = recipes.map(simplifyRecipeNameOnly);
