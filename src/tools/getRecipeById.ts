@@ -9,6 +9,10 @@ export function registerGetRecipeByIdTool(server: McpServer, recipes: Recipe[]) 
     {
       query: z.string().describe('菜谱名称或ID，支持模糊匹配菜谱名称')
     },
+    {
+      title: "Get Recipe by ID",
+      readOnlyHint: true,
+    },
     async ({ query }: { query: string }) => {
       // 首先尝试精确匹配ID
       let foundRecipe = recipes.find(recipe => recipe.id === query);

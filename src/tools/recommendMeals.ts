@@ -15,6 +15,10 @@ export function registerRecommendMealsTool(server: McpServer, recipes: Recipe[])
       peopleCount: z.number().int().min(1).max(10)
                    .describe('用餐人数，1-10之间的整数')
     },
+    {
+      title: "Recommend Weekly Meals",
+      readOnlyHint: true,
+    },
     async ({ allergies = [], avoidItems = [], peopleCount }: { 
       allergies?: string[], 
       avoidItems?: string[], 

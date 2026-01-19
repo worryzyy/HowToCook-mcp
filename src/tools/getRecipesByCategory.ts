@@ -11,6 +11,10 @@ export function registerGetRecipesByCategoryTool(server: McpServer, recipes: Rec
       category: z.enum(categories as [string, ...string[]])
                 .describe('菜谱分类名称，如水产、早餐、荤菜、主食等')
     },
+    {
+      title: "Get Recipes by Category",
+      readOnlyHint: true,
+    },
     async ({ category }: { category: string }) => {
       const filteredRecipes = recipes.filter((recipe) => recipe.category === category);
       // 返回简化版的菜谱数据
