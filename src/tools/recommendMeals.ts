@@ -34,7 +34,7 @@ export function registerRecommendMealsTool(server: McpServer, recipes: Recipe[])
 
       // 将菜谱按分类分组
       const recipesByCategory: Record<string, Recipe[]> = {};
-      const targetCategories = ['水产', '早餐', '荤菜', '主食'];
+      const targetCategories = ['水产', '早餐', '荤菜', '主食', '素菜', '甜品', '汤'];
       
       filteredRecipes.forEach((recipe) => {
         if (targetCategories.includes(recipe.category)) {
@@ -112,8 +112,8 @@ export function registerRecommendMealsTool(server: McpServer, recipes: Recipe[])
         
         // 晚餐
         for (let j = 0; j < mealCount; j++) {
-          // 随机选择菜系，与午餐类似但可添加汤羹
-          const categories = ['主食', '水产', '荤菜', '素菜', '甜品', '汤羹'];
+          // 随机选择菜系，与午餐类似但可添加汤
+          const categories = ['主食', '水产', '荤菜', '素菜', '甜品', '汤'];
           let selectedCategory = categories[Math.floor(Math.random() * categories.length)];
           
           // 如果该分类没有菜谱或已用完，尝试其他分类
@@ -159,7 +159,7 @@ export function registerRecommendMealsTool(server: McpServer, recipes: Recipe[])
         // 计算工作日的基础菜品数量
         const weekdayMealCount = Math.max(2, Math.ceil(peopleCount / 3));
         // 周末菜品数量：比工作日多1-2个菜，随人数增加
-        const weekendAddition = peopleCount <= 4 ? 1 : 2; // 4人以下多1个菜，4人以上多2个菜
+        const weekendAddition = peopleCount <= 4 ? 1 : 2; // 4人及以下多1个菜，4人以上多2个菜
         const mealCount = weekdayMealCount + weekendAddition;
 
         const getMeals = (count: number): SimpleRecipe[] => {
