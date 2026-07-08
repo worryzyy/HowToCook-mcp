@@ -18,16 +18,19 @@ export function registerGetRecipeByIdTool(server: McpServer, recipes: Recipe[]) 
         foundRecipe = recipes.find(recipe => recipe.name === query);
       }
       
-      // 如果还没有找到，尝试模糊匹配名称
+      // 如果还没有找到，尝试模糊匹配名称；仅当唯一命中时才直接返回
       if (!foundRecipe) {
-        foundRecipe = recipes.find(recipe => 
+        const nameMatches = recipes.filter(recipe =>
           recipe.name.toLowerCase().includes(query.toLowerCase())
         );
+        if (nameMatches.length === 1) {
+          foundRecipe = nameMatches[0];
+        }
       }
-      
-      // 如果仍然没有找到，返回所有可能的匹配项（最多5个）
+
+      // 如果仍然没有唯一匹配，返回所有可能的匹配项（最多5个）
       if (!foundRecipe) {
-        const possibleMatches = recipes.filter(recipe => 
+        const possibleMatches = recipes.filter(recipe =>
           recipe.name.toLowerCase().includes(query.toLowerCase()) ||
           recipe.description.toLowerCase().includes(query.toLowerCase())
         ).slice(0, 5);
