@@ -165,7 +165,7 @@ async function main() {
 					res.end(
 						JSON.stringify({
 							name: 'HowToCook MCP Server',
-							version: '0.2.1',
+							version: '0.2.2',
 							transport: TRANSPORT_TYPE,
 							endpoints: {
 								mcp: '/mcp',
