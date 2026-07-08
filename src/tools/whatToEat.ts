@@ -21,10 +21,12 @@ export function registerWhatToEatTool(server: McpServer, recipes: Recipe[]) {
         recipe.category === '荤菜' || recipe.category === '水产'
       );
       
-      // 获取其他可能的菜品（当做素菜）
-      let vegetableDishes = recipes.filter((recipe) => 
-        recipe.category !== '荤菜' && recipe.category !== '水产' && 
-        recipe.category !== '早餐' && recipe.category !== '主食'
+      // 获取其他可能的菜品（当做素菜），排除调料、饮品、半成品加工等非菜品分类
+      let vegetableDishes = recipes.filter((recipe) =>
+        recipe.category !== '荤菜' && recipe.category !== '水产' &&
+        recipe.category !== '早餐' && recipe.category !== '主食' &&
+        recipe.category !== '调料' && recipe.category !== '饮品' &&
+        recipe.category !== '半成品加工'
       );
       
       // 特别处理：如果人数超过8人，增加鱼类荤菜
@@ -36,6 +38,8 @@ export function registerWhatToEatTool(server: McpServer, recipes: Recipe[]) {
         if (fishDishes.length > 0) {
           fishDish = fishDishes[Math.floor(Math.random() * fishDishes.length)];
           recommendedDishes.push(fishDish);
+          // 从荤菜候选中移除已选的鱼菜，避免重复推荐
+          meatDishes = meatDishes.filter((dish) => dish.id !== fishDish!.id);
         }
       }
       
